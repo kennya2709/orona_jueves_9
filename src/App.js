@@ -8,7 +8,14 @@ import Maps from './mapas';
 import curri from './imagenes/curri.png'
 import fotito from './imagenes/fotito.jpg'
 import utd from './imagenes/utd.png'
+import login from './imagenes/login.png'
+import user from './imagenes/user.png'
+import inv from './imagenes/inv.png'
 import { UncontrolledTooltip } from 'reactstrap';
+import Login from './Login';
+import Logout from './LoginLogout';
+import Registro from './Registro';
+import Login_faceboock from './Login_faceboock';
 
 function App() {
   
@@ -20,7 +27,7 @@ function App() {
 
         <Switch>
 
-          <Route path="/" exact>
+          <Route path="/orona" exact>
             <center> <h1>Welcome you're in the homepage </h1>
             
 
@@ -33,14 +40,19 @@ function App() {
     </div> 
   </div>
   <br></br><br></br><br></br>
-              <Button variant="dark" as={Link} to='Example'>Carrusel</Button>
-              <Button variant="dark" as={Link} to='curriculum'>Curriculum</Button>
-              <Button variant="dark" as={Link} to='maps'>Mapa</Button>
+              <Button variant="dark" as={Link} to='/Example'>Carrusel</Button>
+              <Button variant="dark" as={Link} to='/curriculum'>Curriculum</Button>
+              <Button variant="dark" as={Link} to='/maps'>Mapa</Button>
               <Button variant="dark" as={Link} to='/alumno'>Alumno</Button>
               <Button variant="dark" as={Link} to='/Carrera'>Carrera</Button>
               <Button variant="dark" as={Link} to='/universidad'>Universidad</Button>
               <Button variant="dark" as={Link} to='/logo'>Logo</Button>
               <Button variant="dark" as={Link} to='/foto'>Fotito</Button>
+              <Button variant="dark" as={Link} to='/dibujitos'>Mokcup</Button>
+              <Button variant="dark" as={Link} to='/Login'>Login</Button>
+              <Button variant="dark" as={Link} to='/Logout'>Salir</Button>
+              <Button variant="dark" as={Link} to='/Registro'>Registro</Button>
+              <Button variant="dark" as={Link} to='/Login_faceboock'>Face</Button>
             </center>
           </Route>
 
@@ -83,6 +95,10 @@ function App() {
           <Route path="/Example">
             <Example />
           </Route>
+          <Route path="/Login_faceboock">
+            <Login_faceboock />
+          </Route>
+
 
           <Route path="/curriculum">
             <center>
@@ -98,6 +114,46 @@ function App() {
 
           <Route path="/maps">
             <Maps />
+          </Route>
+
+          <Route path="/Login">
+            <Login/>
+          </Route>
+          <Route path="/Registro">
+            <Registro/>
+          </Route>
+
+          <Route path="/Logout">
+            <Logout/>
+          </Route>
+
+          <Route path="/dibujitos">
+            <center>
+              <img
+                src={login}
+                
+                width="700"
+                height="750"
+                className="d-inline-block align-top"
+
+              />
+              <img
+                src={user}
+                
+                width="700"
+                height="750"
+                className="d-inline-block align-top"
+
+              />
+              <img
+                src={inv}
+                
+                width="700"
+                height="750"
+                className="d-inline-block align-top"
+
+              />
+            </center>
           </Route>
 
 

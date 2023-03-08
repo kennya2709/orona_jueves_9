@@ -1,80 +1,123 @@
-import React from "react";
+import React from 'react';
+import GoogleLogin from 'react-google-login';
+import Swal from 'sweetalert2';
+import { useState, useEffect } from 'react';
+import { gapi } from "gapi-script";
+import FacebookLogin from 'react-facebook-login';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { MDBContainer, MDBInput, MDBCheckbox, MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
 
-function Login_form() {   
+function Login() {
 
-    return (
+   const key_login = "889082775733-uft314q6mcdcam2in0dd7rd0nsq8uprc.apps.googleusercontent.com";
+
+   const [user, setUser] = useState({});
+
+   useEffect(() => {
+      const start = () => {
+         gapi.Auth2.init({
+            clientId: key_login,
+         });
+      }
+      gapi.load("client:auth2", start)
+   }, [])
+
+
+   const logeado_exito = (respuesta_exitosa) => {
+      console.log("LOGUEADO CON ÉXITO:", respuesta_exitosa.profileObj);
+      setUser(respuesta_exitosa.profileObj);
+      Swal.fire({
+         icon: 'success',
+         title: 'BIENVENIDO APP UTD',
+      })
+   }
+
+
+   const fallo_login = (res) => {
+      console.log("FALLO EN EL ACCESO:", res.profileObj);
+      Swal.fire({
+         icon: 'error',
+         title: 'Oops...',
+         text: 'LAS CREDENCIALES SON ERRONEAS',
+      })
+   }
+
+   const responseFacebook = (response) => {
+      console.log(response);
+      Swal.fire({
+         icon: 'success',
+         title: 'BIENVENIDO APP UTD',
+      })
+   }
+   const responseFacebook2 = (response) => {
+      console.log(response);
+      Swal.fire({
+         icon: 'success',
+         title: 'BIENVENIDO APP UTD',
+      })
+   }
+   return (
+
+      <>
        
-                <form>
+         <header className="App-header">
+            <h1>Login</h1>
+         <MDBContainer className="p-3 my-5 d-flex flex-column w-20">
+            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' />
+            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+            <div className="d-flex justify-content-between mx-3 mb-4">
+              
+            </div>
+            <MDBBtn className="mb-4">Sign in</MDBBtn>
+            <div className="text-center">
+               <p>or sign up with:</p>
 
-                    <h4 class="modal-title" id="exampleModalLongTitle" align="center">APP PARCIAL II</h4><br />
-                    <div class="form-outline mb-2">
+               <div className='d-flex justify-content-between mx-auto' style={{ width: '40%' }}>
+                  <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
+                     <MDBIcon fab icon='facebook-f' size="sm" />
+                     <FacebookLogin
+                        appId="721476199692477"
+                        autoLoad={false}
+                        callback={responseFacebook}
+                        onSuccess={responseFacebook}
+                        onFailure={responseFacebook2}
+                        isSignedIn={false}
+                     />
+                  </MDBBtn>
+                  <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
+                     <MDBIcon fab icon='google' size="sm" />
+                     <div>
+                     <GoogleLogin
+                        clientId={key_login}
+                        autoLoad={false}
+                        onSuccess={logeado_exito}
+                        onFailure={fallo_login}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={false}
+                     />
+                     </div>
+                     <br></br>
+                     <div class={user ? "profile" : "hidden"}>
+        <img src={user.imageUrl} alt=""/>
+        <h3>{user.name}</h3>
+        <h3>{user.email}</h3>
+        <h3>{user.googleId}</h3>
+        <h3><img  src={user.imgeUrl}
+        /></h3>
+      </div>
+                  </MDBBtn>
 
-                        <label class="form-label" for="form2Example1">Correo Electrónico:</label><br />
-                        <input type="email" id="form2Example1" class="form-control form-control-sm" />
+               </div>
+            </div>
 
-                    </div>
+         </MDBContainer>
+         </header>
+      </>
 
-
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example2">Password:</label>
-                        <input type="password" id="form2Example2" class="form-control form-control-sm" />
-
-                    </div>
-
-
-                    <div class="row mb-4">
-                        <div class="col d-flex justify-content-center">
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                <label class="form-check-label" for="form2Example31"> Recordarme </label>
-                            </div>
-                        </div>
-
-                        <div class="col">
-
-                            <a href="#!">Olvidaste tu contraseña?</a>
-                        </div>
-                    </div>
-
-
-                    <center><button type="button" class="btn btn-primary btn-sm">INGRESAR</button></center>
-
-
-                    <div class="text-center">
-                        <p>No eres usuario? <a href="#!">Registrarse</a></p>
-                        <p>o ingresa con :</p>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1"
-                        
-                        >                       
-                            <i class="fab fa-google"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-                    </div>
-
-                </form>
-          
-   
-          
-   
-          
-    );
-    <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
-    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-      <MDBIcon fab icon='facebook-f' size="sm"/>
-    </MDBBtn>
-
-   
-
-    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-      <MDBIcon fab icon='google' size="sm"/>
-    </MDBBtn>
-    </div>
+   )
 }
 
-export default Login_form;
+
+
+export default Login;

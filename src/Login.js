@@ -52,10 +52,13 @@ function Login() {
       </div>
 
       <div class={user ? "profile" : "hidden"}>
-        <img src={user.imageUrl} alt=""/>
+        <img src={user.imageUrl} alt="" />
         <h3>{user.name}</h3>
         <h3>{user.email}</h3>
         <h3>{user.googleId}</h3>
+        <h3><img
+          src={user.imgeUrl}
+        /></h3>
       </div>
 
     </div>

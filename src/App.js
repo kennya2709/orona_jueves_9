@@ -53,6 +53,7 @@ function App() {
               <Button variant="dark" as={Link} to='/Logout'>Salir</Button>
               <Button variant="dark" as={Link} to='/Registro'>Registro</Button>
               <Button variant="dark" as={Link} to='/Login_faceboock'>Face</Button>
+              <Button variant="dark" href="https://github.com/kennya2709/orona_jueves_9" >Github</Button>
             </center>
           </Route>
 
